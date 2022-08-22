@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Card, CardActions, CardContent, Typography, IconButton} from '@mui/material';
 import {Delete, Edit} from '@mui/icons-material';
 import {useTheme} from "@mui/material/styles";
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 
 interface ActionButtonProps {
     iconColor: string;
@@ -13,25 +13,10 @@ const ActionButton = styled(IconButton)<ActionButtonProps>`
   color: ${props => props.iconColor} !important;
 `
 
-const fadeIn = keyframes`
-  from {
-    transform: scale(0.2) rotate(180deg);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-`;
-
-const AnimatedCard = styled(Card)`
-  animation: ${fadeIn} ease-in 1s;
-`;
-
 function CardNote({description}: { description: string }) {
     const theme = useTheme();
     return (
-        <AnimatedCard sx={{
+        <Card sx={{
             width: 250,
             height: 250,
             backgroundColor: theme.palette.primary.main,
@@ -59,7 +44,7 @@ function CardNote({description}: { description: string }) {
                     <Edit/>
                 </ActionButton>
             </CardActions>
-        </AnimatedCard>
+        </Card>
     );
 }
 

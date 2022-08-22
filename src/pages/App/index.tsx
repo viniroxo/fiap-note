@@ -5,6 +5,7 @@ import CardNote from "../../components/CardNote";
 import {useTheme} from '@mui/material/styles';
 import {Note} from "../../services/notes/types";
 import {NotesService} from "../../services/notes/note-service";
+import CreateNewNote from "../../components/CreateNewNote";
 
 const CardContainer = styled.div`
   margin: 20px;
@@ -38,6 +39,11 @@ function App() {
                 {notes.map((note) => {
                     return <CardNote key={note.id} description={note.text}/>
                 })}
+                <CreateNewNote key={notes.length + 1} onClick={()=>{
+                    console.log("nova nota");
+                    const newNote = {id: notes.length + 1, text: 'Estudar hooks ReactJS', date: new Date(), urgent: false}
+                    setNotes([...notes, newNote])
+                }}/>
             </CardContainer>
         </AppContainer>
     );
