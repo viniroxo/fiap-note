@@ -4,6 +4,7 @@ import {Card, CardActions, CardContent, Typography, IconButton} from '@mui/mater
 import {Delete, Edit} from '@mui/icons-material';
 import {useTheme} from "@mui/material/styles";
 import styled from "styled-components";
+import {CreateNote, Note} from "../../services/notes/types";
 
 interface ActionButtonProps {
     iconColor: string;
@@ -13,7 +14,12 @@ const ActionButton = styled(IconButton)<ActionButtonProps>`
   color: ${props => props.iconColor} !important;
 `
 
-function CardNote({description}: { description: string }) {
+interface CardNoteProps {
+    note: Note,
+    deleteNote: (id: number) => void;
+}
+
+function CardNote({note, deleteNote}: CardNoteProps) {
     const theme = useTheme();
     return (
         <Card sx={{
@@ -30,14 +36,14 @@ function CardNote({description}: { description: string }) {
                             color={theme.palette.primary.contrastText}
                             sx={{fontWeight: "bold", fontSize: "1.2rem"}}
                 >
-                    {description}
+                    {note.text}
                 </Typography>
             </CardContent>
             <CardActions sx={{
                 display: "flex",
                 justifyContent: "flex-end",
             }}>
-                <ActionButton iconColor={theme.palette.primary.contrastText}>
+                <ActionButton iconColor={theme.palette.primary.contrastText} onClick={()=> deleteNote(note.id)}>
                     <Delete/>
                 </ActionButton>
                 <ActionButton iconColor={theme.palette.primary.contrastText}>
@@ -47,10 +53,6 @@ function CardNote({description}: { description: string }) {
         </Card>
     );
 }
-
-CardNote.propTypes = {
-    description: PropTypes.string.isRequired,
-};
 
 export default CardNote;
 
