@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardActions, CardContent, IconButton} from "@mui/material";
 import {useTheme} from "@mui/material/styles";
-import {Add, Close, Save} from "@mui/icons-material";
+import {Add, Close, Save, PriorityHigh} from "@mui/icons-material";
 import styled from "styled-components";
 import {CreateNote} from "../../services/notes/types";
-import {setEngine} from "crypto";
 
 interface CreateNewNoteProps {
     createNote: (note: CreateNote) => void;
@@ -92,14 +91,20 @@ function CreateNewNote({createNote}: CreateNewNoteProps) {
                                   color={theme.palette.primary.contrastText}
                                   placeholder={"Insira o texto da nota"}
                                   autoFocus
-                                  maxLength={140}
+                                  maxLength={90}
                                   onChange={(e) => setText(e.target.value)}
                     />
                 </CardContent>
                 <CardActions sx={{
                     display: "flex",
-                    justifyContent: "flex-end",
+                    justifyContent: "space-between",
                 }}>
+                    <ActionButton iconColor={urgent ? theme.palette.error.main : theme.palette.primary.contrastText}
+                                  onClick={() => {
+                                      setUrgent(!urgent)
+                                  }}>
+                        <PriorityHigh/>
+                    </ActionButton>
                     <ActionButton iconColor={theme.palette.primary.contrastText}
                                   onClick={() => {
                                       createNote({text, urgent})

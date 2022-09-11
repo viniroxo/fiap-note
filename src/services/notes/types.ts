@@ -9,3 +9,9 @@ export interface CreateNote {
     text: string;
     urgent: boolean;
 }
+
+export interface UpdateNote {
+    id: number
+    text: string;
+    urgent?: boolean;
+}

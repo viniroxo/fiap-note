@@ -8,6 +8,13 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {createTheme, ThemeProvider} from "@mui/material";
+import * as dayjs from 'dayjs'
+import isLeapYear from 'dayjs/plugin/isLeapYear';
+import 'dayjs/locale/pt-br'
+
+dayjs.extend(isLeapYear)
+dayjs.locale('pt-br')
+
 
 const theme = createTheme({
     palette: {

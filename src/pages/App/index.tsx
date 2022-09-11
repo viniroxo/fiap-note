@@ -3,7 +3,7 @@ import styled from "styled-components"
 import NavigationBar from "../../components/NavigationBar";
 import CardNote from "../../components/CardNote";
 import {useTheme} from '@mui/material/styles';
-import {CreateNote, Note} from "../../services/notes/types";
+import {CreateNote, Note, UpdateNote} from "../../services/notes/types";
 import {NotesService} from "../../services/notes/note-service";
 import CreateNewNote from "../../components/CreateNewNote";
 
@@ -27,22 +27,32 @@ function App() {
     const [notes, setNotes] = useState<Note[]>([] as Note[]);
     const [text, setText] = useState("");
 
+    const getNotes = () => {
+        NotesService.getNotes().then((response) => {
+            setNotes(response.data);
+        });
+    }
+
     const createNote = (note: CreateNote) => {
-        NotesService.createNotes(note).then(r => {
+        NotesService.createNote(note).then(r => {
             setNotes([...notes, r.data]);
         })
     }
 
     const deleteNote = (id: number) => {
-        NotesService.deleteNote(id).then(r => {
+        NotesService.deleteNote(id).then(() => {
             setNotes((prevState) => prevState.filter((note) => note.id !== id));
         })
     }
 
+    const updateNote = (note: UpdateNote) => {
+        NotesService.updateNote(note).then(() => {
+            getNotes();
+        })
+    }
+
     useEffect(() => {
-        NotesService.getNotes().then((response) => {
-            setNotes(response.data);
-        });
+        getNotes();
     }, []);
 
     return (
@@ -51,11 +61,12 @@ function App() {
                 setText(text);
             }}/>
             <CardContainer>
-                {notes.filter((note) => note.text.includes(text)).map((note) => {
-                    return <CardNote key={note.id} note={note} deleteNote={(id) => {
-                        deleteNote(id)
-                    }}/>
-                })}
+                {notes
+                    .sort((a, b) => Number(b.urgent) - Number(a.urgent))
+                    .filter((note) => note.text.includes(text))
+                    .map((note) => {
+                        return <CardNote key={note.id} note={note} deleteNote={deleteNote} updateNote={updateNote}/>
+                    })}
                 <CreateNewNote key={notes.length + 1} createNote={createNote} onClick={function (...args: any[]) {
                     throw new Error('Function not implemented.');
                 }}/>

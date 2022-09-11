@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, Box, Toolbar, Typography, IconButton, InputBase} from '@mui/material';
-import {Menu as MenuIcon} from '@mui/icons-material';
-import {styled, alpha} from '@mui/material/styles';
+import {AppBar, Box, InputBase, Toolbar, Typography} from '@mui/material';
+import {alpha, styled} from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import {CreateNote} from "../../services/notes/types";
 
 const Search = styled('div')(({theme}) => ({
     position: 'relative',
@@ -59,15 +57,6 @@ function NavigationBar({title, text, onChange}: NavigationBarProps) {
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 2}}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {title}
                     </Typography>
