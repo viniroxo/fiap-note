@@ -48,11 +48,12 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 
 interface NavigationBarProps {
     title: string;
-    text: string;
-    onChange: (text: string) => void;
+    text?: string;
+    onChange?: (text: string) => void;
+    hasSearch?: boolean;
 }
 
-function NavigationBar({title, text, onChange}: NavigationBarProps) {
+function NavigationBar({title, text, onChange, hasSearch}: NavigationBarProps) {
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
@@ -60,25 +61,23 @@ function NavigationBar({title, text, onChange}: NavigationBarProps) {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {title}
                     </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon/>
-                        </SearchIconWrapper>
-                        <StyledInputBase
+                    {hasSearch && (
+                      <Search>
+                          <SearchIconWrapper>
+                              <SearchIcon/>
+                          </SearchIconWrapper>
+                          <StyledInputBase
                             placeholder="Buscar…"
                             inputProps={{'aria-label': 'search'}}
-                            onChange={(e) => onChange(e.target.value)}
+                            onChange={(e) => onChange ? onChange(e.target.value) : null}
                             value={text}
-                        />
-                    </Search>
+                          />
+                      </Search>
+                    )}
                 </Toolbar>
             </AppBar>
         </Box>
     );
 }
-
-NavigationBar.propTypes = {
-    title: PropTypes.string.isRequired,
-};
 
 export default NavigationBar;

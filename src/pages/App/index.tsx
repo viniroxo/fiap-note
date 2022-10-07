@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import NavigationBar from "../../components/NavigationBar";
 import CardNote from "../../components/CardNote";
@@ -7,8 +7,10 @@ import { CreateNote, Note, UpdateNote } from "../../services/notes/types";
 import { NotesService } from "../../services/notes/note-service";
 import CreateNewNote from "../../components/CreateNewNote";
 import { CircularProgress, Fab } from "@mui/material";
-import { PriorityHigh } from "@mui/icons-material";
+import { Logout, PriorityHigh } from "@mui/icons-material";
 import { AppContainer } from "../../components/AppContainer";
+import { Context } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const CardContainer = styled.div`
   margin: 20px;
@@ -17,11 +19,18 @@ const CardContainer = styled.div`
 `;
 
 function App() {
+  const { handleLogout, authenticated } = useContext(Context);
+  const navigate = useNavigate();
+
   const theme = useTheme();
   const [notes, setNotes] = useState<Note[]>([] as Note[]);
   const [urgent, setUrgent] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [text, setText] = useState("");
+
+  useEffect(() => {
+    if (!authenticated) navigate("/");
+  }, [authenticated]);
 
   const getNotes = () => {
     setLoading(true);
@@ -65,8 +74,8 @@ function App() {
   }, []);
 
   return (
-    <AppContainer background={theme.palette.secondary.main}>
-      <NavigationBar title={"FIAP-NOTE"} text={text} onChange={(text: string) => {
+    <AppContainer>
+      <NavigationBar title={"FIAP-NOTE"} hasSearch text={text} onChange={(text: string) => {
         setText(text);
       }} />
       {loading ? (
@@ -86,6 +95,10 @@ function App() {
           <Fab color="primary" sx={{ position: "absolute", bottom: 16, left: 16 }}
                onClick={() => setUrgent(!urgent)}>
             <PriorityHigh color={urgent ? "error" : "inherit"} />
+          </Fab>
+          <Fab color="primary" sx={{ position: "absolute", bottom: 16, right: 16 }}
+               onClick={() => handleLogout()}>
+            <Logout />
           </Fab>
         </>
       )}
