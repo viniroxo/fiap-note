@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/fiap-note/static/css/main.45def101.css",
-    "main.js": "/fiap-note/static/js/main.abe04363.js",
+    "main.css": "/fiap-note/static/css/main.fd4d5342.css",
+    "main.js": "/fiap-note/static/js/main.0f45fc92.js",
     "static/js/787.acf23794.chunk.js": "/fiap-note/static/js/787.acf23794.chunk.js",
     "static/media/roboto-all-500-normal.woff": "/fiap-note/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/fiap-note/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
@@ -36,12 +36,12 @@
     "static/media/roboto-greek-ext-300-normal.woff2": "/fiap-note/static/media/roboto-greek-ext-300-normal.35b9d6be04b95f0f0530.woff2",
     "static/media/roboto-greek-ext-700-normal.woff2": "/fiap-note/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/fiap-note/index.html",
-    "main.45def101.css.map": "/fiap-note/static/css/main.45def101.css.map",
-    "main.abe04363.js.map": "/fiap-note/static/js/main.abe04363.js.map",
+    "main.fd4d5342.css.map": "/fiap-note/static/css/main.fd4d5342.css.map",
+    "main.0f45fc92.js.map": "/fiap-note/static/js/main.0f45fc92.js.map",
     "787.acf23794.chunk.js.map": "/fiap-note/static/js/787.acf23794.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.45def101.css",
-    "static/js/main.abe04363.js"
+    "static/css/main.fd4d5342.css",
+    "static/js/main.0f45fc92.js"
   ]
 }
