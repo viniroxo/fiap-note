@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiAuth = axios.create({
-  baseURL: `https://fiap-notes-api-auth.herokuapp.com/`,
+  baseURL: `https://fiap-notes.herokuapp.com/`,
 });
 
 apiAuth.interceptors.request.use(async (config) => {
