@@ -36,7 +36,7 @@ export default function useAuth() {
         const err = error as ErrorResponse;
         alert(err.response?.data.erro);
       } else {
-        alert("Erro insesperado");
+        alert("Erro inesperado");
       }
     } finally {
       setLoading(false);
@@ -46,12 +46,9 @@ export default function useAuth() {
   async function handleRegister(payload: AuthPayload) {
     try {
       setLoading(true);
-      const {
-        data: { token }
-      } = await AuthService.register(payload);
 
-      localStorage.setItem("token", token);
-      setAuthenticated(true);
+      await AuthService.register(payload);
+      window.location.href = "/fiap-note"
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const err = error as ErrorResponse;

@@ -29,7 +29,7 @@ function App() {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    if (!authenticated) navigate("/");
+    if (!authenticated) navigate("/fiap-note");
   }, [authenticated]);
 
   const getNotes = () => {

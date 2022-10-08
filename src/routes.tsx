@@ -10,7 +10,7 @@ interface PrivateRouteProps {
 }
 
 function PrivateRoute({ authenticated }: PrivateRouteProps) {
-  if (!authenticated) return <Navigate to="/" replace />;
+  if (!authenticated) return <Navigate to="/fiap-note" replace />;
 
   return <Outlet />;
 }
