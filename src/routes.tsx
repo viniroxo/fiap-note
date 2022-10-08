@@ -21,11 +21,11 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/fiap-note/" element={<Login />} />
         <Route element={<PrivateRoute authenticated={authenticated} />}>
-          <Route path="home" element={<App />} />
+          <Route path="/fiap-note/home" element={<App />} />
         </Route>
-        <Route path="register" element={<Register />} />
+        <Route path="/fiap-note/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

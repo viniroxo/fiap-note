@@ -4,6 +4,7 @@ import { Context } from "../../Context/AuthContext";
 import { Box, Button, Container, Paper, TextField as MuiTextField, Typography } from "@mui/material";
 import styled from "styled-components";
 import NavigationBar from "../../components/NavigationBar";
+import AuthForm from "../../components/AuthForm";
 
 const CenterRegister = styled.div`
   height: calc(100vh - 64px);
@@ -18,42 +19,15 @@ const TextField = styled(MuiTextField)`
 function Register() {
   const { handleRegister, authenticated } = useContext(Context);
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (authenticated) navigate("/home");
+    if (authenticated) navigate("/fiap-note/home");
   }, [authenticated]);
 
   return (
     <>
       <NavigationBar title={"FIAP-NOTE"} hasSearch={false} />
-      <CenterRegister>
-        <Container maxWidth="sm">
-          <Box component="form">
-            <Paper elevation={12} sx={{ padding: "40px" }}>
-              <Typography variant="h4">Cadastro</Typography>
-              <TextField
-                value={username}
-                fullWidth
-                id="username"
-                label="Usuário"
-                variant="standard"
-                onChange={(e)=> setUsername(e.target.value)}
-              />
-              <TextField
-                value={password}
-                fullWidth id="password"
-                label="Senha"
-                variant="standard"
-                type="password"
-                onChange={(e)=> setPassword(e.target.value)}
-              />
-              <Button variant="contained" onClick={() => handleRegister({ username, password })}>Login</Button>
-            </Paper>
-          </Box>
-        </Container>
-      </CenterRegister>
+      <AuthForm title={"Cadastrar"} ButtonText={"Cadastrar"} handleSubmit={handleRegister}/>
     </>
   );
 }
